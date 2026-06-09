@@ -1,97 +1,123 @@
 import React from "react";
-import { ShoppingCart, Search, User } from "lucide-react";
 
-const App = () => {
+// Data
+const products = [
+  { id: 1, name: "WK65 Wireless", price: 129, type: "65% Layout" },
+  { id: 2, name: "WK TKL Pro", price: 159, type: "TKL Layout" },
+  { id: 3, name: "WK Alice", price: 189, type: "Ergonomic" },
+  { id: 4, name: "WK NumPad", price: 79, type: "Peripheral" },
+];
+
+const Navbar = () => (
+  <nav className="flex justify-between items-center py-6 border-b border-gray-100">
+    <h1 className="text-xl font-bold tracking-tighter">WKEEBS</h1>
+    <div className="space-x-8 text-sm uppercase tracking-widest text-gray-500">
+      <a href="#about" className="hover:text-black">
+        About
+      </a>
+      <a href="#shop" className="hover:text-black">
+        Shop
+      </a>
+      <a href="#specs" className="hover:text-black">
+        Specs
+      </a>
+      <a href="#cart" className="hover:text-black">
+        Cart (0)
+      </a>
+    </div>
+  </nav>
+);
+
+export default function App() {
   return (
-    <div className="bg-wkeebs-light text-wkeebs-black min-h-screen font-sans">
-      {/* Header */}
-      <header className="border-b border-wkeebs-gray px-6 py-4">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold tracking-tighter">WKEEBS</h1>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="bg-wkeebs-cream px-4 py-1 text-sm outline-none"
-              />
-            </div>
-            <User size={20} />
-            <ShoppingCart size={20} />
-          </div>
-        </div>
-        <nav className="flex gap-8 text-sm uppercase font-medium">
-          {["Keyboards", "Switches", "Keycaps", "Accessories", "On Sale"].map(
-            (link) => (
-              <a key={link} href="#" className="hover:text-wkeebs-gray">
-                {link}
-              </a>
-            ),
-          )}
-        </nav>
+    <div className="max-w-6xl mx-auto px-6 font-sans text-gray-900">
+      <Navbar />
+
+      {/* 1. Hero */}
+      <header className="py-24 text-center">
+        <h2 className="text-6xl font-bold mb-6 tracking-tight">
+          Precision typing.
+        </h2>
+        <p className="text-xl text-gray-500 max-w-lg mx-auto mb-10">
+          Premium mechanical builds designed for performance and longevity.
+        </p>
+        <button className="bg-black text-white px-8 py-3 hover:bg-gray-800">
+          Shop Collection
+        </button>
       </header>
 
-      {/* Hero Section - Inspired by image_366002.jpg */}
-      <section className="p-6 grid grid-cols-3 gap-6">
-        <div className="col-span-2 bg-wkeebs-cream p-10 flex flex-col justify-center">
-          <h2 className="text-5xl font-bold mb-4">Mechanical Keyboards</h2>
-          <button className="bg-wkeebs-black text-wkeebs-light px-6 py-2 w-max text-sm">
-            Shop Keyboards
-          </button>
-        </div>
-        <div className="flex flex-col gap-6">
-          <div className="bg-wkeebs-gray text-wkeebs-light p-6 h-1/2">
-            Switches Guide
+      {/* 2. Features */}
+      <section className="py-20 grid grid-cols-3 gap-12 border-t border-gray-100">
+        {[
+          {
+            title: "Hot-swappable",
+            desc: "Change switches without soldering.",
+          },
+          { title: "CNC Aluminum", desc: "Aviation-grade chassis build." },
+          { title: "Tri-Mode", desc: "Bluetooth, 2.4GHz, and Wired." },
+        ].map((f, i) => (
+          <div key={i}>
+            <h4 className="font-bold mb-2">{f.title}</h4>
+            <p className="text-sm text-gray-500">{f.desc}</p>
           </div>
-          <div className="bg-wkeebs-dark text-wkeebs-light p-6 h-1/2">
-            Keycap Sets
-          </div>
-        </div>
+        ))}
       </section>
 
-      {/* Product Showcase Sections */}
-      <section className="px-6 py-10">
-        <h3 className="text-lg font-bold uppercase mb-6">Layouts</h3>
-        <div className="grid grid-cols-6 gap-4">
-          {["Full", "TKL", "75%", "65%", "60%", "Alice"].map((l) => (
-            <div
-              key={l}
-              className="border border-wkeebs-gray p-6 text-center text-sm"
-            >
-              {l}
+      {/* 3. Shop */}
+      <section id="shop" className="py-20">
+        <h3 className="text-2xl font-bold mb-10">Available Models</h3>
+        <div className="grid grid-cols-4 gap-6">
+          {products.map((p) => (
+            <div key={p.id} className="group cursor-pointer">
+              <div className="h-64 bg-gray-100 mb-4 transition-transform group-hover:scale-[1.02]" />
+              <h4 className="font-medium">{p.name}</h4>
+              <p className="text-sm text-gray-400 mb-2">{p.type}</p>
+              <span className="font-bold">${p.price}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Info Section */}
-      <section className="px-6 py-10 bg-wkeebs-dark text-wkeebs-light">
-        <h3 className="text-lg font-bold mb-4">Finding Your Preference</h3>
-        <p className="text-sm max-w-2xl leading-relaxed">
-          Understanding keyboard feel involves balancing layout utility with
-          switch acoustics. Linear switches offer smooth travel, while tactile
-          switches provide a distinct bump. Acoustics range from the deep
-          'thock' of gasket mounts to the high-pitched crispness of classic
-          boards.
+      {/* 4. Specifications */}
+      <section id="specs" className="py-20 bg-gray-50 px-10">
+        <h3 className="text-2xl font-bold mb-8">Technical Specifications</h3>
+        <table className="w-full text-sm text-left">
+          <tbody className="divide-y divide-gray-200">
+            <tr>
+              <th className="py-4">Connectivity</th>
+              <td className="py-4 text-gray-600">BT 5.0, 2.4GHz, USB-C</td>
+            </tr>
+            <tr>
+              <th className="py-4">Battery</th>
+              <td className="py-4 text-gray-600">4000mAh (up to 200 hours)</td>
+            </tr>
+            <tr>
+              <th className="py-4">Mounting</th>
+              <td className="py-4 text-gray-600">Gasket Mount</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      {/* 5. About */}
+      <section id="about" className="py-20 text-center max-w-2xl mx-auto">
+        <h3 className="text-2xl font-bold mb-6">Our Philosophy</h3>
+        <p className="text-gray-600 leading-relaxed">
+          We believe hardware should be transparent, modular, and built to last.
+          By stripping away unnecessary branding and complexity, we focus purely
+          on the tactile experience of every keystroke.
         </p>
       </section>
 
-      {/* Footer */}
-      <footer className="px-6 py-10 border-t border-wkeebs-gray text-sm">
-        <div className="grid grid-cols-4 gap-8">
-          <h2 className="font-bold">WKEEBS</h2>
-          {["Shop", "Support", "Legal"].map((s) => (
-            <div key={s} className="flex flex-col gap-2 uppercase">
-              {s}
-            </div>
-          ))}
+      {/* 6. Footer */}
+      <footer className="py-12 border-t text-center text-xs text-gray-400 uppercase tracking-widest">
+        <div className="mb-4 space-x-4">
+          <a href="#">Support</a>
+          <a href="#">Shipping</a>
+          <a href="#">Contact</a>
         </div>
-        <div className="mt-10 pt-4 border-t border-wkeebs-gray text-xs text-center">
-          &copy; 2026 wkeebs. All rights reserved.
-        </div>
+        © 2026 WKEEBS INC.
       </footer>
     </div>
   );
-};
-
-export default App;
+}
