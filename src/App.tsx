@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./components/navbar";
 
 // Data
 const products = [
@@ -7,26 +8,6 @@ const products = [
   { id: 3, name: "WK Alice", price: 189, type: "Ergonomic" },
   { id: 4, name: "WK NumPad", price: 79, type: "Peripheral" },
 ];
-
-const Navbar = () => (
-  <nav className="flex justify-between items-center py-6 border-b border-gray-100">
-    <h1 className="text-xl font-bold tracking-tighter">WKEEBS</h1>
-    <div className="space-x-8 text-sm uppercase tracking-widest text-gray-500">
-      <a href="#about" className="hover:text-black">
-        About
-      </a>
-      <a href="#shop" className="hover:text-black">
-        Shop
-      </a>
-      <a href="#specs" className="hover:text-black">
-        Specs
-      </a>
-      <a href="#cart" className="hover:text-black">
-        Cart (0)
-      </a>
-    </div>
-  </nav>
-);
 
 export default function App() {
   return (
