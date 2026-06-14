@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./components/navbar";
-import Cart from "./components/cart";
+
 
 // Data
 const products = [
@@ -10,11 +10,13 @@ const products = [
   { id: 4, name: "WK NumPad", price: 79, type: "Peripheral" },
 ];
 
+
+
 export default function App() {
   return (
     <div className="max-w-6xl mx-auto px-6 font-sans text-gray-900">
       <Navbar />
-      <Cart />
+      
 
       {/* 1. Hero */}
       <header className="py-24 text-center">
